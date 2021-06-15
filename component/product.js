@@ -1,9 +1,12 @@
 import React from 'react'
 import styles from '../styles/Home.module.css'
 
-import { products } from '../lib/product'
+import { initiateCheckout } from '../lib/payment'
 
-function Product({ product: { title, description, image, alt, price } }) {
+function Product({
+  product: { id, title, description, image, alt, price },
+  addToCart
+}) {
   return (
     <li className={styles.card}>
       <a href='https://nextjs.org/docs'>
@@ -12,13 +15,18 @@ function Product({ product: { title, description, image, alt, price } }) {
         <p>${price}</p>
         <p>{description}</p>
       </a>
+      <p>
+        <button className={styles.button} onClick={() => addToCart({ id })}>
+          Add To Cart
+        </button>
+      </p>
     </li>
   )
 }
 
-function ProductList() {
+function ProductList({ products, addToCart }) {
   return products.map((product) => (
-    <Product key={product.id} product={product} />
+    <Product key={product.id} product={product} addToCart={addToCart} />
   ))
 }
 

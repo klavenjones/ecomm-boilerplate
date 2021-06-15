@@ -1,9 +1,18 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { ProductList } from '../component/product'
 
+
+import { products } from '../lib/product'
+import { useCart } from '../hooks/use-cart'
+
+import { FaShoppingCart } from 'react-icons/fa'
+
 export default function Home() {
+  const { subtotal, totalItems, addToCart, checkout } = useCart()
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,8 +28,26 @@ export default function Home() {
           This is a simple ecommerce boilerplate with stripe only
         </p>
 
+        <ul className={styles.cart}>
+          <li>
+            <strong>Items:</strong> {totalItems}
+          </li>
+          <li>
+            <strong>Total:</strong> ${subtotal}
+          </li>
+          <li>
+            <button
+              className={`${styles.button} ${styles.cartButton}`}
+              onClick={checkout}
+            >
+              <FaShoppingCart />
+              Check Out
+            </button>
+          </li>
+        </ul>
+
         <ul className={styles.grid}>
-          <ProductList />
+          <ProductList products={products} addToCart={addToCart} />
         </ul>
       </main>
 
