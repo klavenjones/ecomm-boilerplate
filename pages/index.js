@@ -4,14 +4,13 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { ProductList } from '../component/product'
 
-
 import { products } from '../lib/product'
-import { useCart } from '../hooks/use-cart'
+import { useCart } from '../context/cart'
 
 import { FaShoppingCart } from 'react-icons/fa'
 
 export default function Home() {
-  const { subtotal, totalItems, addToCart, checkout } = useCart()
+  const { subtotal, quantity, addToCart, checkout } = useCart()
 
   return (
     <div className={styles.container}>
@@ -22,29 +21,11 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Ecommerce Stripe Boilerplate</h1>
-
         <p className={styles.description}>
           This is a simple ecommerce boilerplate with stripe only
         </p>
 
-        <ul className={styles.cart}>
-          <li>
-            <strong>Items:</strong> {totalItems}
-          </li>
-          <li>
-            <strong>Total:</strong> ${subtotal}
-          </li>
-          <li>
-            <button
-              className={`${styles.button} ${styles.cartButton}`}
-              onClick={checkout}
-            >
-              <FaShoppingCart />
-              Check Out
-            </button>
-          </li>
-        </ul>
+     
 
         <ul className={styles.grid}>
           <ProductList products={products} addToCart={addToCart} />
