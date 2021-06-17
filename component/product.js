@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 import { initiateCheckout } from '../lib/payment'
 
@@ -9,12 +10,14 @@ function Product({
 }) {
   return (
     <li className={styles.card}>
-      <a href='https://nextjs.org/docs'>
-        <img src={image} alt={alt} />
-        <h2>{title}</h2>
-        <p>${price}</p>
-        <p>{description}</p>
-      </a>
+      <Link href={`/products/${id}`}>
+        <a>
+          <img src={image} alt={alt} />
+          <h2>{title}</h2>
+          <p>${price}</p>
+          <p>{description}</p>
+        </a>
+      </Link>
       <p>
         <button className={styles.button} onClick={() => addToCart({ id })}>
           Add To Cart

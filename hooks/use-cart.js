@@ -55,9 +55,12 @@ export function useCart() {
       })
     })
   }
+
+  
   return {
     cart,
     updateCart,
+    cartItems,
     subtotal,
     totalItems,
     addToCart,
